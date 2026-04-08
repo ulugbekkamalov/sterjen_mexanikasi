@@ -1,0 +1,1 @@
+# sterjen_mexanikasi

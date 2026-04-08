@@ -31,7 +31,6 @@ body{font-family:Georgia,serif;background:var(--bg);color:var(--text);min-height
 .page{max-width:720px;margin:0 auto}
 h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.25rem}
 .subtitle{font-family:sans-serif;font-size:.85rem;color:var(--muted);margin-bottom:2rem}
-
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem 1.5rem;margin-bottom:1.25rem}
 .card-label{font-family:sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.9rem}
 .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
@@ -39,30 +38,22 @@ h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.25rem}
 .inp-block label{display:block;font-family:sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--hint);margin-bottom:5px}
 .inp-block input{width:100%;padding:7px 10px;font-size:14px;font-family:'Courier New',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s}
 .inp-block input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}
-
-.x-row{font-family:sans-serif;font-size:12px;color:var(--muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.x-row{font-family:sans-serif;font-size:12px;color:var(--muted);margin-bottom:1.5rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .x-pill{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:3px 12px;font-size:12px;font-family:'Courier New',monospace;color:var(--text)}
-
 .btn{width:100%;padding:11px;font-size:13px;font-family:sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--text);color:var(--bg);border:none;border-radius:var(--r);cursor:pointer;transition:opacity .15s;margin-bottom:2rem}
 .btn:hover{opacity:.82}
-
-/* ── Section ── */
 .section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:1rem;overflow:hidden}
 .sec-head{display:flex;align-items:center;gap:10px;padding:.9rem 1.25rem;border-bottom:1px solid var(--border2);background:var(--surface2)}
 .sec-num{width:26px;height:26px;border-radius:50%;background:var(--text);color:var(--bg);display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:11px;font-weight:800;flex-shrink:0}
 .sec-title{font-family:sans-serif;font-size:13px;font-weight:700}
 .sec-desc{font-family:sans-serif;font-size:11px;color:var(--muted);margin-top:1px}
 .sec-body{padding:1rem 1.25rem}
-
 .note{font-family:sans-serif;font-size:12.5px;color:var(--muted);margin:4px 0 10px}
 .mblock{margin:10px 0;overflow-x:auto;text-align:center}
 .sep{height:1px;background:var(--border2);margin:12px 0}
 .boxed{background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--r);padding:9px 14px;margin:10px 0;overflow-x:auto;text-align:center}
-
-/* ── PhotoMath cards ── */
 .pm-section-label{font-family:sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--hint);margin-bottom:8px}
 .pm-general{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;overflow-x:auto;text-align:center}
-
 .pm-cards{display:flex;flex-direction:column;gap:8px}
 .pm-card{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
 .pm-card-head{display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--amber-bg);border-bottom:1px solid var(--amber-border)}
@@ -72,14 +63,12 @@ h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.25rem}
 .pm-answer{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--accent-bg);flex-wrap:wrap}
 .pm-answer-lbl{font-family:sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);white-space:nowrap}
 .pm-unit{font-family:sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:2px 6px;margin-left:2px;white-space:nowrap}
-
 .hidden{display:none}
 footer{text-align:center;font-family:sans-serif;font-size:11px;color:var(--hint);margin-top:2.5rem}
 </style>
 </head>
 <body>
 <div class="page">
-
   <h1>Sterjen Mexanikasi</h1>
   <p class="subtitle">Analitik yechim — siljish · deformatsiya · kuchlanish · ichki kuch</p>
 
@@ -96,176 +85,193 @@ footer{text-align:center;font-family:sans-serif;font-size:11px;color:var(--hint)
   <div class="x-row">
     <span>Hisoblash nuqtalari:</span>
     <span class="x-pill">x = 0</span>
-    <span class="x-pill">x = 1 m</span>
-    <span class="x-pill">x = 2 m</span>
+    <span class="x-pill">x = L/2</span>
+    <span class="x-pill">x = L</span>
   </div>
 
   <button class="btn" onclick="solve()">Hisoblash</button>
-
   <div id="output" class="hidden"></div>
   <footer>Sterjen mexanikasi · KaTeX</footer>
 </div>
 
 <script>
-const XS=[0,1,2];
-
-function K(latex,display){
-  const s=document.createElement('span');
-  try{katex.render(latex,s,{throwOnError:false,displayMode:!!display});}
-  catch(e){s.textContent=latex;}
-  return s.outerHTML;
-}
-function sci(v){
-  if(v===0||Math.abs(v)<1e-15)return '0';
-  const abs=Math.abs(v);
-  const e=Math.floor(Math.log10(abs));
-  // small integers or simple decimals — show as-is
-  if(e>=0&&e<=3&&Number.isInteger(v))return v.toString();
-  // always scientific for anything >= 1000 or very small
-  const m=v/Math.pow(10,e);
-  const ms=parseFloat(m.toFixed(2)); // 2 decimal places on mantissa
-  if(ms===1)return '10^{'+e+'}';
-  if(ms===-1)return '-10^{'+e+'}';
-  return ms+'\\times10^{'+e+'}';
-}
-function fn(v){
-  if(v===0)return '0';
-  if(Number.isInteger(v))return v.toString();
-  return parseFloat(v.toPrecision(6)).toString();
-}
-function mblock(latex){return `<div class="mblock">${K(latex,true)}</div>`;}
-function note(t){return `<p class="note">${t}</p>`;}
-function sep(){return '<div class="sep"></div>';}
-function boxed(latex){return `<div class="boxed">${K(latex,true)}</div>`;}
-
-function secWrap(num,title,desc,body){
-  return `<div class="section">
-    <div class="sec-head">
-      <div class="sec-num">${num}</div>
-      <div>
-        <div class="sec-title">${title}</div>
-        <div class="sec-desc">${desc}</div>
-      </div>
-    </div>
-    <div class="sec-body">${body}</div>
-  </div>`;
+// LaTeX render qilish
+function K(latex, display) {
+  const el = document.createElement('span');
+  try { katex.render(latex, el, { throwOnError: false, displayMode: !!display }); }
+  catch(e) { el.textContent = latex; }
+  return el.outerHTML;
 }
 
-/* PhotoMath block:
-   generalLatex   : umumiy formula (LaTeX)
-   subLatexFn(xv) : x qo'yilgan formula (LaTeX)
-   resultFn(xv)   : hisoblangan son
-   unit           : birlik
-*/
-function pmBlock(generalLatex, subLatexFn, resultFn, unit){
-  let html='';
-  html+=`<div class="pm-section-label">Umumiy formula</div>`;
-  html+=`<div class="pm-general">${K(generalLatex,true)}</div>`;
-  html+=`<div class="pm-section-label">x = 0, 1, 2 ga qo'yish</div>`;
-  html+=`<div class="pm-cards">`;
-  XS.forEach(xv=>{
-    const res=resultFn(xv);
-    html+=`<div class="pm-card">
-      <div class="pm-card-head"><span>x = ${xv} m qo'yildi</span></div>
-      <div class="pm-step">
-        <div class="pm-step-lbl">O'rinbosar (x = ${xv} qo'yilgan)</div>
-        ${K(subLatexFn(xv),true)}
-      </div>
-      <div class="pm-answer">
-        <span class="pm-answer-lbl">Natija</span>
-        ${K(sci(res))}
-        <span class="pm-unit">${unit}</span>
-      </div>
-    </div>`;
+// Sonni LaTeX ga o'girish — \times yoki \tfrac yo'q, faqat a \cdot 10^{n}
+function fmt(v) {
+  if (v === 0 || Math.abs(v) < 1e-18) return '0';
+  const abs = Math.abs(v);
+  // oddiy ko'rinish (0.001 dan 999999 gacha)
+  if (abs >= 0.001 && abs < 1e6) {
+    const s = parseFloat(v.toPrecision(6));
+    return s.toString();
+  }
+  // ilmiy ko'rinish: a \cdot 10^{n}
+  const exp = Math.floor(Math.log10(abs));
+  const man = parseFloat((v / Math.pow(10, exp)).toPrecision(4));
+  if (man === 1)  return '10^{' + exp + '}';
+  if (man === -1) return '-10^{' + exp + '}';
+  return man + ' \\cdot 10^{' + exp + '}';
+}
+
+function mblock(latex)  { return '<div class="mblock">' + K(latex, true) + '</div>'; }
+function note(t)        { return '<p class="note">' + t + '</p>'; }
+function sep()          { return '<div class="sep"></div>'; }
+function boxed(latex)   { return '<div class="boxed">' + K(latex, true) + '</div>'; }
+
+function secWrap(num, title, desc, body) {
+  return '<div class="section">'
+    + '<div class="sec-head">'
+    +   '<div class="sec-num">' + num + '</div>'
+    +   '<div><div class="sec-title">' + title + '</div>'
+    +   '<div class="sec-desc">' + desc + '</div></div>'
+    + '</div>'
+    + '<div class="sec-body">' + body + '</div>'
+    + '</div>';
+}
+
+// 3 ta nuqta: x=0, x=L/2, x=L
+function pmBlock(generalLatex, subFn, resFn, unit, L) {
+  const half = L / 2;
+  const points = [
+    { xv: 0,    head: 'x = 0 qo\'yildi',
+      xl: '0' },
+    { xv: half, head: 'x = L/2 = ' + fmt(half) + ' m qo\'yildi',
+      xl: '\\dfrac{L}{2} = ' + fmt(half) },
+    { xv: L,    head: 'x = L = ' + fmt(L) + ' m qo\'yildi',
+      xl: 'L = ' + fmt(L) },
+  ];
+
+  let html = '<div class="pm-section-label">Umumiy formula</div>'
+           + '<div class="pm-general">' + K(generalLatex, true) + '</div>'
+           + '<div class="pm-section-label">x = 0, L/2, L ga qo\'yish</div>'
+           + '<div class="pm-cards">';
+
+  points.forEach(function(pt) {
+    const res = resFn(pt.xv);
+    html += '<div class="pm-card">'
+          +   '<div class="pm-card-head"><span>' + pt.head + '</span></div>'
+          +   '<div class="pm-step">'
+          +     '<div class="pm-step-lbl">O\'rinbosar</div>'
+          +     K(subFn(pt.xv, pt.xl), true)
+          +   '</div>'
+          +   '<div class="pm-answer">'
+          +     '<span class="pm-answer-lbl">Natija</span>'
+          +     K(fmt(res))
+          +     '<span class="pm-unit">' + unit + '</span>'
+          +   '</div>'
+          + '</div>';
   });
-  html+=`</div>`;
+  html += '</div>';
   return html;
 }
 
-function solve(){
-  const L=parseFloat(document.getElementById('iL').value)||3;
-  const A=parseFloat(document.getElementById('iA').value)||0.01;
-  const E=parseFloat(document.getElementById('iE').value)||210e9;
-  const q=parseFloat(document.getElementById('iq').value)||1000;
-  const EA=E*A;
-  const C1=q*L;
+function solve() {
+  const L  = parseFloat(document.getElementById('iL').value) || 3;
+  const A  = parseFloat(document.getElementById('iA').value) || 0.01;
+  const E  = parseFloat(document.getElementById('iE').value) || 210e9;
+  const q  = parseFloat(document.getElementById('iq').value) || 1000;
+  const EA = E * A;
+  const C1 = q * L;
 
-  const u   = x=>(C1*x - q*x*x/2)/EA;
-  const eps = x=>(C1 - q*x)/EA;
-  const sig = x=>E*eps(x);
-  const Nf  = x=>A*sig(x);
+  const u   = function(x){ return (C1*x - q*x*x/2) / EA; };
+  const eps = function(x){ return (C1 - q*x) / EA; };
+  const sig = function(x){ return E * eps(x); };
+  const Nf  = function(x){ return A * sig(x); };
 
-  let html='';
+  let html = '';
 
-  /* ── 1 ── */
-  html+=secWrap(1,'Boshqaruv tenglamasi','Differensial tenglama',
-    mblock('\\dfrac{d}{dx}\\!\\left(EA\\,\\dfrac{du}{dx}\\right)+q(x)=0')+
-    `<div class="note">Berilgan qiymatlar: &nbsp;${K('E='+sci(E)+'\\text{ Pa}')} &nbsp;·&nbsp; ${K('A='+fn(A)+'\\text{ m}^2')} &nbsp;·&nbsp; ${K('EA='+sci(EA)+'\\text{ N}')} &nbsp;·&nbsp; ${K('q='+sci(q)+'\\text{ N/m}')} &nbsp;·&nbsp; ${K('L='+fn(L)+'\\text{ m}')}</div>`
-  );
-
-  /* ── 2 ── */
-  html+=secWrap(2,'Birinchi integratsiya','Tenglamani x bo\'yicha bir marta integrallash',
-    note('Tenglamani bir marta integrallash:')+
-    mblock('EA\\,\\dfrac{du}{dx}+qx=C_1')+
-    mblock('\\dfrac{du}{dx}=\\dfrac{C_1-qx}{EA}')
-  );
-
-  /* ── 3 ── */
-  html+=secWrap(3,'Ikkinchi integratsiya','Umumiy yechim — C₁ va C₂ mavjud',
-    note('Yana bir marta integrallash:')+
-    mblock('u(x)=\\dfrac{1}{EA}\\!\\left(C_1\\,x-\\dfrac{qx^2}{2}\\right)+C_2')
-  );
-
-  /* ── 4 ── */
-  html+=secWrap(4,'Chegaraviy shartlar','C₁ va C₂ ni topish',
-    note('<strong>Shart 1</strong> — chap uchi mahkamlangan: u(0) = 0')+
-    mblock('u(0)=\\dfrac{1}{EA}\\!\\left(C_1\\cdot0-\\dfrac{q\\cdot0^2}{2}\\right)+C_2=0')+
-    boxed('C_2 = 0')+sep()+
-    note("<strong>Shart 2</strong> — o'ng uchi erkin, tashqi kuch yo'q:")+
-    mblock('\\left.EA\\,\\dfrac{du}{dx}\\right|_{x=L}=0 \\;\\Longrightarrow\\; C_1-qL=0')+
-    boxed(`C_1=qL=${sci(q)}\\cdot${fn(L)}=${sci(C1)}\\text{ N}`)
-  );
-
-  /* ── 5 ── */
-  html+=secWrap(5,'Siljish u(x)','Analitik yechim + x = 0, 1, 2 uchun hisoblash',
-    pmBlock(
-      `u(x)=\\dfrac{q}{EA}\\!\\left(Lx-\\dfrac{x^2}{2}\\right)=\\dfrac{${sci(q)}}{${sci(EA)}}\\!\\left(${fn(L)}x-\\dfrac{x^2}{2}\\right)`,
-      xv=>`u(${xv})=\\dfrac{${sci(q)}}{${sci(EA)}}\\!\\left(${fn(L)}\\cdot${xv}-\\dfrac{${xv}^2}{2}\\right)`,
-      u, 'm'
+  // --- 1 ---
+  html += secWrap(1, 'Boshqaruv tenglamasi', 'Differensial tenglama',
+    mblock('\\dfrac{d}{dx}\\!\\left(EA\\,\\dfrac{du}{dx}\\right) + q(x) = 0') +
+    note(
+      'Berilgan:&nbsp; ' +
+      K('E = ' + fmt(E) + '\\text{ Pa}') + ' &nbsp;&middot;&nbsp; ' +
+      K('A = ' + fmt(A) + '\\text{ m}^2') + ' &nbsp;&middot;&nbsp; ' +
+      K('EA = ' + fmt(EA) + '\\text{ N}') + ' &nbsp;&middot;&nbsp; ' +
+      K('q = ' + fmt(q) + '\\text{ N/m}') + ' &nbsp;&middot;&nbsp; ' +
+      K('L = ' + fmt(L) + '\\text{ m}')
     )
   );
 
-  /* ── 6 ── */
-  html+=secWrap(6,'Deformatsiya ε(x)','ε = du/dx &nbsp;→&nbsp; u(x) ning hosilasi',
+  // --- 2 ---
+  html += secWrap(2, 'Birinchi integratsiya', "Tenglamani x bo'yicha bir marta integrallash",
+    note('Tenglamani bir marta integrallash:') +
+    mblock('EA\\,\\dfrac{du}{dx} + qx = C_1') +
+    mblock('\\dfrac{du}{dx} = \\dfrac{C_1 - qx}{EA}')
+  );
+
+  // --- 3 ---
+  html += secWrap(3, 'Ikkinchi integratsiya', "Umumiy yechim — C\u2081 va C\u2082 mavjud",
+    note('Yana bir marta integrallash:') +
+    mblock('u(x) = \\dfrac{1}{EA}\\!\\left(C_1\\,x - \\dfrac{q x^2}{2}\\right) + C_2')
+  );
+
+  // --- 4 ---
+  html += secWrap(4, 'Chegaraviy shartlar', "C\u2081 va C\u2082 ni topish",
+    note('<strong>Shart 1</strong> — chap uchi mahkamlangan: u(0) = 0') +
+    mblock('u(0) = \\dfrac{1}{EA}\\!\\left(C_1 \\cdot 0 - \\dfrac{q \\cdot 0^2}{2}\\right) + C_2 = 0') +
+    boxed('C_2 = 0') +
+    sep() +
+    note("<strong>Shart 2</strong> — o'ng uchi erkin, tashqi kuch yo'q:") +
+    mblock('\\left.EA\\,\\dfrac{du}{dx}\\right|_{x=L} = 0 \\;\\Longrightarrow\\; C_1 - qL = 0') +
+    boxed('C_1 = qL = ' + fmt(q) + ' \\cdot ' + fmt(L) + ' = ' + fmt(C1) + '\\text{ N}')
+  );
+
+  // --- 5 siljish ---
+  html += secWrap(5, 'Siljish u(x)', 'Analitik yechim + x = 0, L/2, L uchun hisoblash',
     pmBlock(
-      `\\varepsilon(x)=\\dfrac{q}{EA}(L-x)=\\dfrac{${sci(q)}}{${sci(EA)}}(${fn(L)}-x)`,
-      xv=>`\\varepsilon(${xv})=\\dfrac{${sci(q)}}{${sci(EA)}}(${fn(L)}-${xv})`,
-      eps, '(o\'lchamsiz)'
+      'u(x) = \\dfrac{q}{EA}\\!\\left(Lx - \\dfrac{x^2}{2}\\right) = \\dfrac{' + fmt(q) + '}{' + fmt(EA) + '}\\!\\left(' + fmt(L) + '\\,x - \\dfrac{x^2}{2}\\right)',
+      function(xv, xl) {
+        return 'u\\!\\left(' + xl + '\\right) = \\dfrac{' + fmt(q) + '}{' + fmt(EA) + '}\\!\\left(' + fmt(L) + ' \\cdot ' + fmt(xv) + ' - \\dfrac{' + fmt(xv) + '^2}{2}\\right)';
+      },
+      u, 'm', L
     )
   );
 
-  /* ── 7 ── */
-  html+=secWrap(7,'Kuchlanish σ(x)','Guk qonuni: σ = E · ε',
+  // --- 6 deformatsiya ---
+  html += secWrap(6, 'Deformatsiya \u03b5(x)', '\u03b5 = du/dx',
     pmBlock(
-      `\\sigma(x)=E\\cdot\\varepsilon(x)=\\dfrac{q}{A}(L-x)=\\dfrac{${sci(q)}}{${fn(A)}}(${fn(L)}-x)`,
-      xv=>`\\sigma(${xv})=\\dfrac{${sci(q)}}{${fn(A)}}(${fn(L)}-${xv})`,
-      sig, 'Pa'
+      '\\varepsilon(x) = \\dfrac{q}{EA}(L - x) = \\dfrac{' + fmt(q) + '}{' + fmt(EA) + '}(' + fmt(L) + ' - x)',
+      function(xv, xl) {
+        return '\\varepsilon\\!\\left(' + xl + '\\right) = \\dfrac{' + fmt(q) + '}{' + fmt(EA) + '}(' + fmt(L) + ' - ' + fmt(xv) + ')';
+      },
+      eps, "(o'lchamsiz)", L
     )
   );
 
-  /* ── 8 ── */
-  html+=secWrap(8,'Ichki kuch N(x)','N = A · σ',
+  // --- 7 kuchlanish ---
+  html += secWrap(7, 'Kuchlanish \u03c3(x)', 'Guk qonuni: \u03c3 = E \u00b7 \u03b5',
     pmBlock(
-      `N(x)=A\\cdot\\sigma(x)=q(L-x)=${sci(q)}(${fn(L)}-x)`,
-      xv=>`N(${xv})=${sci(q)}(${fn(L)}-${xv})`,
-      Nf, 'N'
+      '\\sigma(x) = \\dfrac{q}{A}(L - x) = \\dfrac{' + fmt(q) + '}{' + fmt(A) + '}(' + fmt(L) + ' - x)',
+      function(xv, xl) {
+        return '\\sigma\\!\\left(' + xl + '\\right) = \\dfrac{' + fmt(q) + '}{' + fmt(A) + '}(' + fmt(L) + ' - ' + fmt(xv) + ')';
+      },
+      sig, 'Pa', L
     )
   );
 
-  const out=document.getElementById('output');
-  out.innerHTML=html;
+  // --- 8 ichki kuch ---
+  html += secWrap(8, 'Ichki kuch N(x)', 'N = A \u00b7 \u03c3',
+    pmBlock(
+      'N(x) = q(L - x) = ' + fmt(q) + '(' + fmt(L) + ' - x)',
+      function(xv, xl) {
+        return 'N\\!\\left(' + xl + '\\right) = ' + fmt(q) + '(' + fmt(L) + ' - ' + fmt(xv) + ')';
+      },
+      Nf, 'N', L
+    )
+  );
+
+  const out = document.getElementById('output');
+  out.innerHTML = html;
   out.classList.remove('hidden');
-  out.scrollIntoView({behavior:'smooth',block:'start'});
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
 </body>

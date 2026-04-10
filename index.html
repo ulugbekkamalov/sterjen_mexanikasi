@@ -63,6 +63,22 @@ h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.25rem}
 .pm-answer{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--accent-bg);flex-wrap:wrap}
 .pm-answer-lbl{font-family:sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);white-space:nowrap}
 .pm-unit{font-family:sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:2px 6px;margin-left:2px;white-space:nowrap}
+
+/* ── Umumiy jadval ── */
+.summary-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:1rem;overflow:hidden}
+.summary-head{display:flex;align-items:center;gap:10px;padding:.9rem 1.25rem;border-bottom:1px solid var(--border2);background:var(--surface2)}
+.summary-star{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:13px;font-weight:800;flex-shrink:0}
+.summary-title{font-family:sans-serif;font-size:13px;font-weight:700}
+.summary-desc{font-family:sans-serif;font-size:11px;color:var(--muted);margin-top:1px}
+.tbl-wrap{overflow-x:auto;padding:1rem 1.25rem}
+table.res{width:100%;border-collapse:collapse;font-family:sans-serif;font-size:12.5px}
+table.res th{background:var(--surface2);border:1px solid var(--border);padding:7px 10px;text-align:center;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
+table.res th.sym{font-size:13px;text-transform:none;letter-spacing:0;color:var(--text)}
+table.res td{border:1px solid var(--border2);padding:8px 10px;text-align:center;vertical-align:middle}
+table.res tr:nth-child(even) td{background:var(--surface2)}
+table.res td.x-cell{background:var(--accent-bg);font-weight:700;font-family:'Courier New',monospace;font-size:12px;white-space:nowrap}
+table.res td.val{font-family:'Courier New',monospace;font-size:12px}
+
 .hidden{display:none}
 footer{text-align:center;font-family:sans-serif;font-size:11px;color:var(--hint);margin-top:2.5rem}
 </style>
@@ -95,7 +111,6 @@ footer{text-align:center;font-family:sans-serif;font-size:11px;color:var(--hint)
 </div>
 
 <script>
-// LaTeX render qilish
 function K(latex, display) {
   const el = document.createElement('span');
   try { katex.render(latex, el, { throwOnError: false, displayMode: !!display }); }
@@ -103,21 +118,35 @@ function K(latex, display) {
   return el.outerHTML;
 }
 
-// Sonni LaTeX ga o'girish — \times yoki \tfrac yo'q, faqat a \cdot 10^{n}
 function fmt(v) {
   if (v === 0 || Math.abs(v) < 1e-18) return '0';
   const abs = Math.abs(v);
-  // oddiy ko'rinish (0.001 dan 999999 gacha)
   if (abs >= 0.001 && abs < 1e6) {
-    const s = parseFloat(v.toPrecision(6));
-    return s.toString();
+    return parseFloat(v.toPrecision(6)).toString();
   }
-  // ilmiy ko'rinish: a \cdot 10^{n}
   const exp = Math.floor(Math.log10(abs));
   const man = parseFloat((v / Math.pow(10, exp)).toPrecision(4));
   if (man === 1)  return '10^{' + exp + '}';
   if (man === -1) return '-10^{' + exp + '}';
   return man + ' \\cdot 10^{' + exp + '}';
+}
+
+// Sonni oddiy matn ko'rinishida (KaTeX emas, jadval uchun)
+function fmtPlain(v) {
+  if (v === 0 || Math.abs(v) < 1e-18) return '0';
+  const abs = Math.abs(v);
+  if (abs >= 0.001 && abs < 1e6) {
+    return parseFloat(v.toPrecision(6)).toString();
+  }
+  const exp = Math.floor(Math.log10(abs));
+  const man = parseFloat((v / Math.pow(10, exp)).toPrecision(4));
+  if (man === 1)  return '10' + sup(exp);
+  if (man === -1) return '-10' + sup(exp);
+  return man + ' \u00d7 10' + sup(exp);
+}
+function sup(n) {
+  const map = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+  return n.toString().split('').map(function(c){ return map[c]||c; }).join('');
 }
 
 function mblock(latex)  { return '<div class="mblock">' + K(latex, true) + '</div>'; }
@@ -136,29 +165,22 @@ function secWrap(num, title, desc, body) {
     + '</div>';
 }
 
-// 3 ta nuqta: x=0, x=L/2, x=L
 function pmBlock(generalLatex, subFn, resFn, unit, L) {
   const half = L / 2;
   const points = [
-    { xv: 0,    head: 'x = 0 qo\'yildi',
-      xl: '0' },
-    { xv: half, head: 'x = L/2 = ' + fmt(half) + ' m qo\'yildi',
-      xl: '\\dfrac{L}{2} = ' + fmt(half) },
-    { xv: L,    head: 'x = L = ' + fmt(L) + ' m qo\'yildi',
-      xl: 'L = ' + fmt(L) },
+    { xv: 0,    head: "x = 0 qo'yildi",                        xl: '0' },
+    { xv: half, head: 'x = L/2 = ' + fmt(half) + ' m qo\'yildi', xl: '\\dfrac{L}{2} = ' + fmt(half) },
+    { xv: L,    head: 'x = L = ' + fmt(L) + ' m qo\'yildi',     xl: 'L = ' + fmt(L) },
   ];
-
   let html = '<div class="pm-section-label">Umumiy formula</div>'
            + '<div class="pm-general">' + K(generalLatex, true) + '</div>'
            + '<div class="pm-section-label">x = 0, L/2, L ga qo\'yish</div>'
            + '<div class="pm-cards">';
-
   points.forEach(function(pt) {
     const res = resFn(pt.xv);
     html += '<div class="pm-card">'
           +   '<div class="pm-card-head"><span>' + pt.head + '</span></div>'
-          +   '<div class="pm-step">'
-          +     '<div class="pm-step-lbl">O\'rinbosar</div>'
+          +   '<div class="pm-step"><div class="pm-step-lbl">O\'rinbosar</div>'
           +     K(subFn(pt.xv, pt.xl), true)
           +   '</div>'
           +   '<div class="pm-answer">'
@@ -169,6 +191,51 @@ function pmBlock(generalLatex, subFn, resFn, unit, L) {
           + '</div>';
   });
   html += '</div>';
+  return html;
+}
+
+// Umumiy natijalar jadvali
+function summaryTable(L, u, eps, sig, Nf) {
+  const half = L / 2;
+  const points = [
+    { label: 'x = 0',           xv: 0    },
+    { label: 'x = L/2 = ' + fmtPlain(half) + ' m', xv: half },
+    { label: 'x = L = '  + fmtPlain(L)    + ' m', xv: L    },
+  ];
+
+  // jadval sarlavhasi: x | u(x) [m] | ε(x) | σ(x) [Pa] | N(x) [N]
+  let html = '<div class="summary-section">'
+    + '<div class="summary-head">'
+    +   '<div class="summary-star">\u2211</div>'
+    +   '<div>'
+    +     '<div class="summary-title">Umumiy natijalar jadvali</div>'
+    +     '<div class="summary-desc">u(x), \u03b5(x), \u03c3(x), N(x) — barcha nuqtalarda</div>'
+    +   '</div>'
+    + '</div>'
+    + '<div class="tbl-wrap">'
+    + '<table class="res">'
+    + '<thead><tr>'
+    +   '<th>Nuqta</th>'
+    +   '<th class="sym">' + K('x') + ' (m)</th>'
+    +   '<th class="sym">' + K('u(x)') + ' (m)</th>'
+    +   '<th class="sym">' + K('\\varepsilon(x)') + '</th>'
+    +   '<th class="sym">' + K('\\sigma(x)') + ' (Pa)</th>'
+    +   '<th class="sym">' + K('N(x)') + ' (N)</th>'
+    + '</tr></thead>'
+    + '<tbody>';
+
+  points.forEach(function(pt) {
+    html += '<tr>'
+          + '<td class="x-cell">' + pt.label + '</td>'
+          + '<td class="val">' + fmtPlain(pt.xv) + '</td>'
+          + '<td class="val">' + fmtPlain(u(pt.xv)) + '</td>'
+          + '<td class="val">' + fmtPlain(eps(pt.xv)) + '</td>'
+          + '<td class="val">' + fmtPlain(sig(pt.xv)) + '</td>'
+          + '<td class="val">' + fmtPlain(Nf(pt.xv)) + '</td>'
+          + '</tr>';
+  });
+
+  html += '</tbody></table></div></div>';
   return html;
 }
 
@@ -187,7 +254,7 @@ function solve() {
 
   let html = '';
 
-  // --- 1 ---
+  // 1
   html += secWrap(1, 'Boshqaruv tenglamasi', 'Differensial tenglama',
     mblock('\\dfrac{d}{dx}\\!\\left(EA\\,\\dfrac{du}{dx}\\right) + q(x) = 0') +
     note(
@@ -200,31 +267,31 @@ function solve() {
     )
   );
 
-  // --- 2 ---
+  // 2
   html += secWrap(2, 'Birinchi integratsiya', "Tenglamani x bo'yicha bir marta integrallash",
     note('Tenglamani bir marta integrallash:') +
     mblock('EA\\,\\dfrac{du}{dx} + qx = C_1') +
     mblock('\\dfrac{du}{dx} = \\dfrac{C_1 - qx}{EA}')
   );
 
-  // --- 3 ---
-  html += secWrap(3, 'Ikkinchi integratsiya', "Umumiy yechim — C\u2081 va C\u2082 mavjud",
+  // 3
+  html += secWrap(3, 'Ikkinchi integratsiya', 'Umumiy yechim \u2014 C\u2081 va C\u2082 mavjud',
     note('Yana bir marta integrallash:') +
     mblock('u(x) = \\dfrac{1}{EA}\\!\\left(C_1\\,x - \\dfrac{q x^2}{2}\\right) + C_2')
   );
 
-  // --- 4 ---
-  html += secWrap(4, 'Chegaraviy shartlar', "C\u2081 va C\u2082 ni topish",
-    note('<strong>Shart 1</strong> — chap uchi mahkamlangan: u(0) = 0') +
+  // 4
+  html += secWrap(4, 'Chegaraviy shartlar', 'C\u2081 va C\u2082 ni topish',
+    note('<strong>Shart 1</strong> \u2014 chap uchi mahkamlangan: u(0) = 0') +
     mblock('u(0) = \\dfrac{1}{EA}\\!\\left(C_1 \\cdot 0 - \\dfrac{q \\cdot 0^2}{2}\\right) + C_2 = 0') +
     boxed('C_2 = 0') +
     sep() +
-    note("<strong>Shart 2</strong> — o'ng uchi erkin, tashqi kuch yo'q:") +
+    note("<strong>Shart 2</strong> \u2014 o'ng uchi erkin, tashqi kuch yo'q:") +
     mblock('\\left.EA\\,\\dfrac{du}{dx}\\right|_{x=L} = 0 \\;\\Longrightarrow\\; C_1 - qL = 0') +
     boxed('C_1 = qL = ' + fmt(q) + ' \\cdot ' + fmt(L) + ' = ' + fmt(C1) + '\\text{ N}')
   );
 
-  // --- 5 siljish ---
+  // 5 siljish
   html += secWrap(5, 'Siljish u(x)', 'Analitik yechim + x = 0, L/2, L uchun hisoblash',
     pmBlock(
       'u(x) = \\dfrac{q}{EA}\\!\\left(Lx - \\dfrac{x^2}{2}\\right) = \\dfrac{' + fmt(q) + '}{' + fmt(EA) + '}\\!\\left(' + fmt(L) + '\\,x - \\dfrac{x^2}{2}\\right)',
@@ -235,7 +302,7 @@ function solve() {
     )
   );
 
-  // --- 6 deformatsiya ---
+  // 6 deformatsiya
   html += secWrap(6, 'Deformatsiya \u03b5(x)', '\u03b5 = du/dx',
     pmBlock(
       '\\varepsilon(x) = \\dfrac{q}{EA}(L - x) = \\dfrac{' + fmt(q) + '}{' + fmt(EA) + '}(' + fmt(L) + ' - x)',
@@ -246,7 +313,7 @@ function solve() {
     )
   );
 
-  // --- 7 kuchlanish ---
+  // 7 kuchlanish
   html += secWrap(7, 'Kuchlanish \u03c3(x)', 'Guk qonuni: \u03c3 = E \u00b7 \u03b5',
     pmBlock(
       '\\sigma(x) = \\dfrac{q}{A}(L - x) = \\dfrac{' + fmt(q) + '}{' + fmt(A) + '}(' + fmt(L) + ' - x)',
@@ -257,7 +324,7 @@ function solve() {
     )
   );
 
-  // --- 8 ichki kuch ---
+  // 8 ichki kuch
   html += secWrap(8, 'Ichki kuch N(x)', 'N = A \u00b7 \u03c3',
     pmBlock(
       'N(x) = q(L - x) = ' + fmt(q) + '(' + fmt(L) + ' - x)',
@@ -267,6 +334,9 @@ function solve() {
       Nf, 'N', L
     )
   );
+
+  // 9 — Umumiy jadval
+  html += summaryTable(L, u, eps, sig, Nf);
 
   const out = document.getElementById('output');
   out.innerHTML = html;
